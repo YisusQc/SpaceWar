@@ -1,4 +1,5 @@
 build
+Debug
 spacewar
 *.exe
 *.out
