@@ -14,7 +14,9 @@ Este proyecto busca, promover la curiosidad para mejorar el aprendizaje sobre t�
 - **Arquitectura:** modular y orientada a objetos.
 
 ## Controles por defecto
+
 Pueden modificarse a conveniencia desde el código fuente.
+
 | Tecla | Acción |
 |:-:|-|
 | `A` `W` `D` `S` | Movimiento P1 |
@@ -57,6 +59,7 @@ Pueden modificarse a conveniencia desde el código fuente.
     ```bash
     cmake --version
     ```
+    
     Puede utilizar GNU Make configurando un archivo Makefile personalizado, pero naturalmente este proyecto ya está configurado para una compilación rápida
     con CMake.
      
