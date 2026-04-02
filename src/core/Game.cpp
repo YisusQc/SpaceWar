@@ -158,20 +158,20 @@ void Game::processEvents() {
       }
 
       if (gameState == GameState::WaitingStart) {
-        if (key->scancode == sf::Keyboard::Scancode::Up && twoPlayers) {
+        if (key->scancode == sf::Keyboard::Scancode::Up || key->scancode == sf::Keyboard::Scancode::K && twoPlayers) {
           twoPlayers = false;
           menu->setSelection(false);
           audio.playSound(SoundType::Select);
-        } else if (key->scancode == sf::Keyboard::Scancode::Up) {
+        } else if (key->scancode == sf::Keyboard::Scancode::Up || key->scancode == sf::Keyboard::Scancode::K) {
           twoPlayers = true;
           menu->setSelection(true);
           audio.playSound(SoundType::Select);
         }
-        if (key->scancode == sf::Keyboard::Scancode::Down && !twoPlayers) {
+        if (key->scancode == sf::Keyboard::Scancode::Down || key->scancode == sf::Keyboard::Scancode::J && !twoPlayers) {
           twoPlayers = true;
           menu->setSelection(true);
           audio.playSound(SoundType::Select);
-        } else if (key->scancode == sf::Keyboard::Scancode::Down) {
+        } else if (key->scancode == sf::Keyboard::Scancode::Down || key->scancode == sf::Keyboard::Scancode::J) {
           twoPlayers = false;
           menu->setSelection(false);
           audio.playSound(SoundType::Select);
