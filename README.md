@@ -1,12 +1,12 @@
 # SpaceWar
 
 SpaceWar es un juego desarrollado en C++ utilizando la librería SFML.
-Este proyecto busca, promover la curiosidad para mejorar el aprendizaje sobre técnicas, diseño, abstracción e implementación de dicho lenguaje de una forma recreativa.
+Este proyecto busca, promover la curiosidad para mejorar el aprendizaje sobre técnicas, diseño, abstracción e implementación del uso de dicho lenguaje de una forma recreativa.
 
 ## Características
 
-- **Lenguaje:** C++20
-- **Gráficos y audio:** SFML
+- **Lenguaje y estándar:** C++20
+- **Gráficos y audio:** SFML 3
 - **Multiplataforma:** gracias a CMake, puede compilarse en Windows, Linux y macOS con distintos generadores (Visual Studio, Ninja, MinGW Makefiles, MSYS Makefiles, Unix Makefiles, etc.)
 - **Gestión de memoria:** uso de `std::unique_ptr` y RAII.
 - **Aleatoriedad:** `std::mt19937`, `std::uniform_real_distribution`, entre otros, para simular comportamiento autónomo de enemigos (*pseudo-bots*).
@@ -21,17 +21,13 @@ Pueden modificarse a conveniencia desde el código fuente.
 | `T` | Disparo P1 |
 | `Left` `Up` `Right` `Down` | Movimiento P2 |
 | `RShift` | Disparo P2 |
-| `Up` / `Down` | Seleccionar cantidad de jugadores (en modo menú) |
-| `Enter` | Empezar / reiniciar juego (en modo menú, gameover o victory) |
+| `J` / `K` o `Down` / `Up` | Seleccionar cantidad de jugadores (en modo menú) |
+| `Enter` | Empezar / reiniciar juego (en modo menú, 'gameover' o 'victory') |
 | `Esc` | Salir del juego |
 
 ## Requerimientos
 
-> [!NOTE]
-> De no tener SFML instalado, no contar con la versión requerida, o no desea actualizar su versión actual; puede continuar con la Compilación.
-> El archivo cmake se encargará de descargar y administrar las dependencias necesarias localmente en el directorio del proyecto, para compilar y ejecutar el programa.
-
-1. `SFML 3.0.2`, igualmente desde la v3.0.0 también es funcional, puede revisar la versión con:
+1. `SFML 3` o superior, puede revisar la versión con:
 
    - En Arch Linux:
 
@@ -41,7 +37,7 @@ Pueden modificarse a conveniencia desde el código fuente.
      
    - En Windows:
      
-       - Si instalaste SFML con vcpkg:
+       - Si instalaste SFML con VCPKG:
          
            ```bash
            // En PowerShell
@@ -50,30 +46,21 @@ Pueden modificarse a conveniencia desde el código fuente.
            vcpkg list | findstr sfml
            ```
            
-       - Si instalaste SFML con MSYS2 o MinGW: (las rutas pueden variar un poco, depende de tu instalación de la herramienta)
+       - Si instalaste SFML con MSYS2:
          
            ```bash
-           // Para MSYS2
-           cd C:/msys64/ucrt64/include/SFML
-           // Para MinGW
-           cd C:/msys64/mingw64/include/SFML
+           pacman -Qs sfml
            ```
-    
-           Aquí deberías encontrar el archivo Config.hpp, abrirlo y revisar las macros de versión.
-           
-         
-       - Si instalaste SFML manualmente en otro directorio dirígite al mismo,
-         y el nombre del comprimido .zip (u otro) indicará la versión, o de igual forma el archivo Config.hpp contendrá la versión.
-         Además, tendrás que especificar las rutas concretas a los recursos de SFML en el CMakeLists.txt del proyecto, a menos que ya estén incluidas en el PATH)
      
-3. Herramienta de automatización de compilación `Cmake` versión mínima 3.30, puede revisar con:
+2. Herramienta `Cmake` versión 3.30 o superior, puede revisar con:
 
     ```bash
     cmake --version
     ```
-    Puede utilizar GNU Make configurando un Makefile personalizado, pero naturalmente este proyecto ya está configurado para una compilación rápida con Cmake.
+    Puede utilizar GNU Make configurando un archivo Makefile personalizado, pero naturalmente este proyecto ya está configurado para una compilación rápida
+    con CMake.
      
-4. Estándar de leguaje `C++20`, el archivo CMakeLists.txt llamará automáticamente a dicho estándar y lo utilizará para la compilación.
+3. Estándar de leguaje `C++20`, el archivo CMakeLists.txt llamará automáticamente a dicho estándar y lo utilizará para la compilación.
 
 ## Compilación
 
@@ -85,33 +72,61 @@ Pueden modificarse a conveniencia desde el código fuente.
 
 2. Iniciar generación:
 
-    ```bash
-    // Desde directorio raíz
-    cmake -S . -B build -G "<generador de preferencia>"
-    // O también simplmente (dejar que cmake elija el generador predeterminado según la plataforma en que se está ejecutando)
-    cmake -B build
-    // O desde el directorio /build
-    cmake ..
-    ```
+   - En UNIX/Linux:
+
+     ```bash
+     cmake -B build
+     ```
+  
+   - En Windows:
+
+     - Con VCPKG:
+  
+       ```bash
+       cmake -B build -DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake
+       ```
+       
+       Si `[path to vcpkg]` contiene algún espacio, envolver toda la variable con comillas, `"-DCMAKE_TOOLCHAIN_FILE=[...].../vcpkg.cmake"`
+       
+     - Entorno MSYS2:
+
+       ```bash
+       cmake -B build
+       ```
+
+       Si se elije el generador de Visual Studio automáticamente, entonces especificar algún generador viable para MSYS2 `cmake -B build -G <generador>`
+       como por ejemplo `"MSYS Makefiles"`, `"MinGW Makefiles"` o `Ninja`.
+    
 3. Iniciar compilación:
 
    ```bash
-   // Desde directorio raíz
    cmake --build build
-   // O desde directorio /build
-   cmake .
-   // O también desde directorio /build
-   make
    ```
 
 ## Ejecución
 
-La compilación generará el target `spacewar` por defecto en la raíz del proyecto, y lo puede correr con `./spacewar` y empezar a jugar.
+   - En UNIX/Linux:
+
+     ```bash
+     ./build/spacewar
+     ```
+
+   - En Windows:
+
+     - Con VCPKG:
+
+       ```bash
+       ./Debug/spacewar
+       ```
+
+     - Entorno MSYS2:
+
+       ```bash
+       ./buld/spacewar
+       ```
 
    > [!IMPORTANT]
-   >  En caso haya realizado la compilación desde `/build` se sugiere regresar al directorio raíz del proyecto (`cd ..`) y correr el ejecutable desde ahí,
-   > ya que intentar ejecutar desde build (por ejemplo `../spacewar`) resultará en un error general del programa, ya que no será capaz de encontrar las rutas
-   > a los recursos (fonts, textures, sounds) del juego.
+   > Deberá correr el ejecutable desde la raíz del proyecto, de lo contrario la salida resultará en un error general del programa, ya que no será capaz de          encontrar las rutas a los recursos (fonts, textures, sounds) del juego.
 
 ## Contribuciones
 
