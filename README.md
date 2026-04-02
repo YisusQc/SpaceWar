@@ -35,11 +35,7 @@ Pueden modificarse a conveniencia desde el código fuente.
 
      ```bash
      pkg-config --modversion sfml-all
-     ```
-
-     O también:
-     
-     ```bash
+     // O también
      pacman -Qs sfml
      ```
      
