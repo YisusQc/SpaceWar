@@ -30,8 +30,6 @@ add_executable(${PROJECT_NAME}
   src/systems/DecorativeSpawner.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE include)
-
 target_link_libraries(${PROJECT_NAME}
   SFML::Graphics
   SFML::Window
