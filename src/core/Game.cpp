@@ -1,5 +1,6 @@
 #include "../../include/core/Game.hpp"
 #include "../../include/extras/PlayerControls.hpp"
+#include "SFML/Window/WindowEnums.hpp"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <string>
@@ -23,7 +24,7 @@ PlayerControls p2Controls {
 bool collisionSoundOcurredP1, collisionSoundOcurredP2 = false;
 
 Game::Game()
-: window(sf::VideoMode({1280, 720}), "SpaceWar") {
+: window(sf::VideoMode({1280, 720}), "SpaceWar", sf::Style::None) {
   window.setFramerateLimit(60);
 
   worldBounds = sf::FloatRect({0.f, 0.f},{static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)});
