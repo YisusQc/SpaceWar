@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.hpp"
+#include "../utils/Config.hpp"
 
 enum class ProjectileOwner {
   Player,
@@ -23,7 +24,7 @@ public:
 
 private:
   sf::Vector2f direction;
-  float speed = 700.f;
+  float speed = Config::W/1.6f;  // 700f -> /1.82f   750.f -> 1.7f   800.f -> /1.6
   ProjectileOwner owner;
 };
 

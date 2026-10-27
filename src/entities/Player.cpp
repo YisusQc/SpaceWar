@@ -26,7 +26,7 @@ Player::Player(
   sprite->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
 
   // Nace fuera de la pantalla
-  sprite->setPosition({-150.f, targetPos.y});
+  sprite->setPosition({-Config::W/8.53f, targetPos.y});
 
   animIdle.addFrame(idle);
   animIdle.setFrameTime(0.f);
@@ -42,7 +42,7 @@ Player::Player(
 }
 
 void Player::updateSpawning(float dt) {
-  sprite->move({400.f * dt, 0.f});
+  sprite->move({Config::W/3.2f * dt, 0.f});
 
   if (sprite->getPosition().x >= spawnTarget.x) {
     sprite->setPosition(spawnTarget);

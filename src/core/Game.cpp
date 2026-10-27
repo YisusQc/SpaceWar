@@ -1,6 +1,6 @@
+#include "../../include/utils/Config.hpp"
 #include "../../include/core/Game.hpp"
 #include "../../include/extras/PlayerControls.hpp"
-#include "SFML/Window/WindowEnums.hpp"
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include <string>
@@ -24,7 +24,7 @@ PlayerControls p2Controls {
 bool collisionSoundOcurredP1, collisionSoundOcurredP2 = false;
 
 Game::Game()
-: window(sf::VideoMode({1280, 720}), "SpaceWar", sf::Style::None) {
+: window(sf::VideoMode({Config::W, Config::H}), "Main") {
   window.setFramerateLimit(60);
 
   worldBounds = sf::FloatRect({0.f, 0.f},{static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)});
@@ -117,13 +117,13 @@ Game::Game()
 
   player1 = std::make_unique<Player>(
     p1Controls, P1Texture, P1UpFrames, P1DownFrames, P1DestroyFrames,
-    sf::Vector2f({200.f, window.getSize().y / 3.f}),
+    sf::Vector2f({Config::W/6.4f, window.getSize().y / 3.f}),
     projectiles, projectileTexture, audio
   );
 
   player2 = std::make_unique<Player>(
     p2Controls, P2Texture, P2UpFrames, P2DownFrames, P2DestroyFrames,
-    sf::Vector2f({220.f, window.getSize().y / 2.f}),
+    sf::Vector2f({Config::W/5.12f, window.getSize().y / 2.f}),
     projectiles, projectileTexture, audio
   );
 
@@ -199,14 +199,14 @@ void Game::processEvents() {
 
           player1 = std::make_unique<Player>(
             p1Controls, P1Texture, P1UpFrames, P1DownFrames, P1DestroyFrames,
-            sf::Vector2f({200.f, window.getSize().y / 3.f}),
+            sf::Vector2f({Config::W/6.4f, window.getSize().y / 3.f}),
             projectiles, projectileTexture, audio
           );
 
           if (twoPlayers) {
             player2 = std::make_unique<Player>(
               p2Controls, P2Texture, P2UpFrames, P2DownFrames, P2DestroyFrames,
-              sf::Vector2f({200.f, window.getSize().y / 2.f}),
+              sf::Vector2f({Config::W/5.12f, window.getSize().y / 2.f}),
               projectiles, projectileTexture, audio
             );
           }
@@ -266,7 +266,7 @@ void Game::update(float dt) {
       enemyFactory.create(
         enemyTexture,
         enemyDestroyFrames,
-        {1100.f, y}
+        {Config::W/1.16f, y}
       )
     );
     enemySpawnTimer = enemySpawnRate;
@@ -286,7 +286,7 @@ void Game::update(float dt) {
     neutrals.push_back(
       std::make_unique<Neutral>(
         neutralTexture,
-        sf::Vector2f(1400.f, y),
+        sf::Vector2f(Config::W/0.91f, y),
         speed,
         rot
       )

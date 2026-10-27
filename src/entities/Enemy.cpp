@@ -22,7 +22,7 @@ Enemy::Enemy(
   auto b = sprite->getLocalBounds();
   sprite->setOrigin({b.size.x / 2.f, b.size.y / 2.f});
 
-  sprite->setPosition({1400.f, targetPos.y});
+  sprite->setPosition({Config::W/0.91f, targetPos.y});
 
   for (auto* t : destroyFrames) animDestroy.addFrame(*t);
 
@@ -31,7 +31,7 @@ Enemy::Enemy(
 }
 
 void Enemy::updateSpawning(float dt) {
-  sprite->move({-300.f * dt, 0.f});
+  sprite->move({-Config::W/4.26f * dt, 0.f});
 
   if (sprite->getPosition().x <= spawnTarget.x) {
     sprite->setPosition(spawnTarget);

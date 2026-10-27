@@ -21,7 +21,7 @@ void Neutral::update(float dt) {
   sprite->move(velocity * dt);
   sprite->rotate(sf::degrees(rotationSpeed * dt));
 
-  if (sprite->getPosition().x < -200.f)
+  if (sprite->getPosition().x < -Config::W/6.4f)
     destroy();
 }
 

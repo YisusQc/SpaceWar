@@ -27,7 +27,7 @@ void Projectile::update(float dt) {
   sprite->move(direction * speed * dt);
 
   // Destruir si sale de pantalla
-  if (sprite->getPosition().x > 1400 || sprite->getPosition().x < -200) {
+  if (sprite->getPosition().x > Config::W/0.91f || sprite->getPosition().x < -Config::W/6.4f) {
     destroy();
   }
 }
